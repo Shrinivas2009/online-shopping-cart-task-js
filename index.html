@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Generics | Store</title>
+        <meta name="description" content="This is the description">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="store.js" async></script>
+    </head>
+    <body>
+        <header class="main-header">
+            <h1 class="band-name band-name-large"> All Items</h1>
+        </header>
+        <section class="content-section col-xs-12 col-sm-8">
+            <div class="shop-items col-xs-12 col-sm-12 " id="app"></div>
+        </section>
+        
+        <section class="cart-item-container col-xs-12 col-sm-4">
+            <h2 class="section-header">CART</h2>
+            <div class="cart-row">
+                <span class="cart-item cart-header cart-column">ITEM</span>
+                <span class="cart-price cart-header cart-column">PRICE</span>
+                <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+            </div>
+            <div class="cart-items">
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-title">Total</strong>
+                <span class="cart-total-price">$0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+        </section>
+    </body>
+    <script>
+      var items =[
+        {
+                        name: "Samsung Series 4",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 13999,
+                            display: 22500
+            },
+                        discount: 37
+        },
+        {
+                        name: "Samsung Super 6",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 35999,
+                            display: 66900
+            },
+                        discount: 46
+        },
+        {
+                        name: "Samsung The Frame",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 84999,
+                            display: 133900
+            },
+                        discount: 36
+        },
+        {
+                        name: "Thomson B9 Pro",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 9999,
+                            display: 16999
+            },
+                        discount: 41
+        },
+        {
+                        name: "LG Ultra HD",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 39990,
+                            display: 79990
+            },
+                        discount: 50
+        },
+        {
+                        name: "Vu Ready LED TV",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 7999,
+                            display: 17e3
+            },
+                        discount: 52
+        },
+        {
+                        name: "Koryo Android TV",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 55999,
+                            display: 199990
+            },
+                        discount: 71
+        },
+        {
+                        name: "Micromax LED Smart",
+                        image: "https://rukminim1.flixcart.com/image/670/600/allinone-desktop/d/n/q/apple-imac-21-5-inch-4k-retina-core-i5-3-1ghz-8gb-1tb-intel-iris-original-imaeh5h83fuzbksz.jpeg?q=90",
+                        price: {
+                            actual: 9999,
+                            display: 27990
+            },
+                        discount: 64
+        }
+    ]
+
+    function cartItemsData(item) {
+      return `
+      <div class="shop-item col-xs-12 col-lg-4 col-md-4 col-sm-6">
+        <div class="shop-item-container">
+          <span class="shop-item-discount">${item.discount}%</span>
+          <img class="shop-item-image" src=${item.image}>
+          <span class="shop-item-title">${item.name}</span>
+          <div class="shop-item-details">
+              <span class="shop-item-price"><del>${item.price.display}</del></span>
+              <span class="shop-item-price">${item.price.actual}</span>
+              <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+          </div>
+        </div>
+    </div>
+      `;
+    }
+
+    document.getElementById("app").innerHTML = `
+      ${items.map(cartItemsData).join("")}
+    `;
+
+    </script>
+</html>
